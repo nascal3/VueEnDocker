@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t VueEnDocker -f Dockerfile.dev .
+  - docker build -t vueindocker -f Dockerfile.dev .
 
 script:
-  - docker run VueEnDocker npm run test -- --coverage
+  - docker run vueindocker npm run test -- --coverage
