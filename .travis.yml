@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t vueindocker -f Dockerfile.dev .
+
+script:
+  - docker run vueindocker npm run test:unit -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "dockervue"
+  env: "Docker-env"
+  bucket_name: "elcaticcbeanstalk-38383rnfnf"
+  bucket_path: "dockervue"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+
